@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quasiris Suche API</title>
+
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+
+<form action="/search" method="get">
+    <div class="input-group">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search...">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Suchen</button>
+        </div>
+    </div>
+</form>
+
+
+
+<section class="filter">
+    <h3>Hier können Sie Ihre Suche verfeinern</h3>
+
+    <form id="filter-form">
+        <label for="filter">Filter</label>
+        <input type="text" id="filter-box" class="filter-search-form" name="filter" placeholder="Filtern..." autocomplete="off">
+    </form>
+</section>
+
+
+<section class="show-results>">
+    <h3>Folgendes wurde für diesen Suchbegriff gefunden:</h3>
+    <ul>
+        <!-- Suchergebnisse ausgeben -->
+        <div class="container">
+            <h1>Suchergebnisse</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Max Mustermann</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Susanne Musterfrau</td>
+                    <td>25</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </ul>
+
+</section>
+
+
+</body>
+</html>
