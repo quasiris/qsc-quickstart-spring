@@ -3,71 +3,108 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Quasiris Suche API</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
+    <style>
+       body {
+           background-color:white;
+           color: black;
+           cursor: pointer;
+        }
 
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
+        .logo {
+             display: block;
+             margin-left: auto;
+             margin-right: auto;
+             width: 25%;
 
+        }
+
+        .results-container {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .filters-container {
+            border: 1px solid black;
+            padding: 10px;
+            width: 300px;
+            height: 400px;
+            margin-left: 10px;
+        }
+
+        .company-name {
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: black;
+        }
+
+    </style>
 
 
 </head>
 <body>
 
-<form action="/search" method="get">
-    <div class="input-group">
-        <input type="text" name="searchTerm" class="form-control" placeholder="Search...">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">Suchen</button>
+<img src="https://quasiris-search-cloud.com/img/quasiris-logo.png" alt="logo" class="logo">
+
+<div class="row mt-3"></div>
+<div class="row mt-3"></div>
+<div class="row mt-3"></div>
+
+<div class="container">
+    <form th:action="@{/search}" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" id="query" name="q" placeholder="Suchbegriff eingeben">
         </div>
-    </div>
-</form>
-
-
-
-<section class="filter">
-    <h3>Hier können Sie Ihre Suche verfeinern</h3>
-
-    <form id="filter-form">
-        <label for="filter">Filter</label>
-        <input type="text" id="filter-box" class="filter-search-form" name="filter" placeholder="Filtern..." autocomplete="off">
+        <button type="submit" class="btn btn-dark">Suchen</button>
     </form>
-</section>
+</div>
 
-
-<section class="show-results>">
-    <h3>Folgendes wurde für diesen Suchbegriff gefunden:</h3>
-    <ul>
-        <!-- Suchergebnisse ausgeben -->
-        <div class="container">
-            <h1>Suchergebnisse</h1>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr>
-                    <td>1</td>
-                    <td>Max Mustermann</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Susanne Musterfrau</td>
-                    <td>25</td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="parent-container d-flex">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Suchergebnisse</h3>
+                </div>
+            </div>
+            <div class="row mt-3">
+                    <div class="col-md-12">
+                            <div class="results-container">
+                                <pre th:text="${result}"></pre>
+                                <pre th:text="${result}"></pre>
+                                <pre th:text="${result}"></pre>
+                                <pre th:text="${result}"></pre>
+                                <pre th:text="${result}"></pre>
+                                <pre th:text="${result}"></pre>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
 
-    </ul>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="filters-container">
+                        <div class="col-md-12">
+                            <h3>Filter - coming soon</h3>
+                        </div>
+                        <pre th:text="${filter}"></pre>
+                        <pre th:text="${filter}"></pre>
+                        <pre th:text="${filter}"></pre>
+                        <pre th:text="${filter}"></pre>
+                        <pre th:text="${filter}"></pre>
+                        <pre th:text="${filter}"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
 
-</section>
-
+    </div>
 
 </body>
 </html>

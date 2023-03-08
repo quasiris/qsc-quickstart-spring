@@ -1,56 +1,43 @@
 package de.jonasermert.quasiris.search.api.controller;
 
-import com.quasiris.qsf.dto.response.SearchResult;
-import de.jonasermert.quasiris.search.api.entity.SearchQuery;
-import jakarta.servlet.http.HttpServletRequest;
+import de.jonasermert.quasiris.search.api.entity.Product;
+import de.jonasermert.quasiris.search.api.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/search")
-public class SearchController<search> {
+@Controller
+public class SearchController {
 
-    private List<SearchQuery> searchList = new ArrayList<>();
-
-    @GetMapping
-    public List<SearchQuery> getAllPersons() {
-        return searchList;
-    }
-    @RequestMapping("/search")
-    public String getSearch(@RequestParam(required=false) String query) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity("https://qsc-dev.quasiris.de/api/v1/search/ab/products?q=" + query, String.class);
-
-        return response.getBody();
-    }
-
-    @PostMapping
-    public ResponseEntity<Void> addSearch(@RequestBody search search) {
-        searchList.add((SearchQuery) search);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    @Autowired
+    private SearchService productSearchService;
 
     /*
-    @GetMapping("/search")
-    public String search(@RequestParam("searchTerm") String searchTerm) {
-        List<searchResult> results = searchService.search(searchTerm);
+    public ProductSearchController(ProductSearchService productSearchService) {
+        this.productSearchService = productSearchService;
+    }
+    */
 
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String searchProducts(@RequestParam String query, Model model) {
+        try {
+            List<Product> products = productSearchService.searchProducts(query);
+            model.addAttribute("products", products);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "searchResults";
     }
-
-    @RequestMapping(method= RequestMethod.POST)
-    public String submitForm(@RequestParam String query) {
-
-     return "results";
-    }
-*/
 
 
 
