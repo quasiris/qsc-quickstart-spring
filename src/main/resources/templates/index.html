@@ -43,6 +43,24 @@
             color: black;
         }
     </style>
+
+    <!--
+    <script th:inline="javascript">
+        function search() {
+            var query = document.getElementById("query").value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var result = this.responseText;
+                    document.getElementById("result").innerHTML = result;
+                }
+            };
+            xhr.open("GET", "/search?q=" + query, true);
+            xhr.send();
+        }
+    </script>
+    -->
+
 </head>
 <body>
 <div class="container mt-5">
@@ -60,7 +78,7 @@
                         <button type="submit" class="btn btn-dark">Suchen</button>
                     </div>
                     <div class="col-md-2">
-                        <a href="https://github.com/quasiris/qsc-quickstart-spring"><img src="https://icon-library.com/images/github-icon-svg/github-icon-svg-27.jpg" class="github"></a>
+                        <a href="https://github.com/quasiris/qsc-quickstart-spring" target="_blank"><img src="https://icon-library.com/images/github-icon-svg/github-icon-svg-27.jpg" class="github"></a>
                     </div>
                 </div>
             </form>
@@ -69,14 +87,12 @@
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container">
-                <h3>Filter - coming soon</h3>
-                <pre th:text="${filter}"></pre>
+
             </div>
         </div>
         <div class="col-md-8">
-            <div class="results-container">
-                <h3>Suchergebnisse</h3>
-                <pre th:text="${result}"></pre>
+            <div class="results-container" th:utext="${result}">
+                <div th:text="${result}"></div>
             </div>
         </div>
     </div>
