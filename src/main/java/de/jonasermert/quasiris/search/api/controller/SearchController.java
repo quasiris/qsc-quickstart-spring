@@ -19,4 +19,10 @@ public class SearchController {
         return result;
     }
 
+    @GetMapping("/filter")
+    public String filter(@RequestParam(name="word") String word, Model model) {
+
+        return "index";
+    }
+
 }
