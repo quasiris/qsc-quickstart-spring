@@ -8,13 +8,13 @@
 
     <style>
         html {
-            overflow: hidden;
+            /* overflow: hidden; */
         }
         body {
             background-color:white;
             color: black;
             margin-top: 25px;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
         .logo {
             display: center;
@@ -24,8 +24,10 @@
         }
 
         h4 {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: bold;
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
 
         .github {
@@ -37,9 +39,10 @@
         }
         .results-container {
             border: 1px solid black;
-            padding: 10px;
-            height: 400px;
+            padding:10px;
+            min-height: 500px;
             position: relative;
+
         }
         .pagination {
             position: absolute;
@@ -50,7 +53,7 @@
         .filters-container {
             border: 1px solid black;
             padding: 10px;
-            height: 400px;
+            min-height: 400px;
         }
         .company-name {
             padding: 20px;
@@ -64,6 +67,9 @@
         }
 
 </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 </head>
 <body>
@@ -91,16 +97,31 @@
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container mb-3">
+
+
+
+
+
             </div>
             <div class="filter-button">
                 <a href="/filter" class="btn btn-dark">Ergebnisse filtern</a>
             </div>
 
+            <div class="col-md-8">
+                <footer class="text-center text-dark" style="background-color: white; margin-top: 20px">
+                    <div class="text-center p-2" style="background-color: white;">
+                        © 2023 Quasiris
+                    </div>
+                </footer>
+            </div>
+
         </div>
+
+
         <div class="col-md-8">
             <div class="results-container">
                 <div th:if="${not #lists.isEmpty(searchResults)}">
-                    <!-- <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4> -->
+                    <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
                     <ul>
                             <!-- STATUS OUTPUT -->
                         <!--
@@ -111,17 +132,21 @@
 
                             <!-- PRODUCTS NAME OUTPUT -->
                         <!--
-                        <div th:utext="${searchResults.result.productrs.name}"></div>
+                        <div th:utext="${searchResults.result.products.name}"></div>
                         -->
 
 
                         <!-- DOCUMENTS OUTPUT -->
+                        <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
+                            Keine Ergebnisse
+                        </div>
                         <div th:each="document : ${searchResults.result.products.documents}">
-                            <div th:utext="${document}"></div>
+                            <div class="alert alert-success" th:utext="${document}"></div>
                         </div>
 
                     </ul>
                 </div>
+
                 <!--
                 <div th:if="${#lists.isEmpty(searchResults)}">
                     <p>Keine Ergebnisse gefunden.</p>
@@ -175,15 +200,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="col-md-8">
-        <footer class="text-center text-dark" style="background-color: white; margin-top: 20px">
-            <div class="text-center p-2" style="background-color: white;">
-                © 2023 Quasiris
-            </div>
-            <!-- <button class="btn btn-dark">Dark Theme</button> -->
-        </footer>
     </div>
 
 </body>
