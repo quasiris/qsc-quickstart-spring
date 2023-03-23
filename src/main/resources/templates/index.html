@@ -138,10 +138,22 @@
 
                         <!-- DOCUMENTS OUTPUT -->
                         <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
-                            Keine Ergebnisse
+                            <b>Keine Ergebnisse</b> &#x1F641 <br>
+
+                            <br>
+
+                            Es wurden keine mit deiner Suchanfrage  übereinstimmenden Dokumente gefunden. <br>
+                            <br>
+
+                            <b>Vorschläge:</b> <br>
+
+                            <li><i>Achte darauf, dass alle Wörter richtig geschrieben sind.</i></li>
+                            <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
+                            <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
+                            <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
                         </div>
                         <div th:each="document : ${searchResults.result.products.documents}">
-                            <div class="alert alert-success" th:utext="${document}"></div>
+                            <div class="alert alert-secondary" th:utext="${document}"></div>
                         </div>
 
                     </ul>
