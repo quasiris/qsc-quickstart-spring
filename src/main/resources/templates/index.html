@@ -37,12 +37,15 @@
             width: 45%;
             cursor: pointer;
         }
+        .form-control {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
         .results-container {
             border: 1px solid black;
             padding:10px;
             min-height: 500px;
             position: relative;
-
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
         .pagination {
             position: absolute;
@@ -54,6 +57,7 @@
             border: 1px solid black;
             padding: 10px;
             min-height: 400px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
         .company-name {
             padding: 20px;
@@ -65,6 +69,10 @@
         ul {
             list-style: none;
         }
+        .button {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
 
 </style>
 
@@ -97,7 +105,6 @@
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container mb-3">
-
 
 
 
@@ -151,78 +158,24 @@
                             <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
                             <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
                             <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
+
+                            <br>
+                            <br>
+
+                            <a th:href="@{/}" class="btn btn-dark">Zurück zur Startseite</a>
+
                         </div>
                         <div th:each="document : ${searchResults.result.products.documents}">
                             <div class="alert alert-secondary" th:utext="${document}"></div>
+
                         </div>
 
                     </ul>
                 </div>
-
-                <!--
-                <div th:if="${#lists.isEmpty(searchResults)}">
-                    <p>Keine Ergebnisse gefunden.</p>
-                </div>
-                -->
-                <!-- PAGINATION START -->
-
-                <!--
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true" style="color:black">Erste Seite</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage - 1}" tabindex="-1" aria-disabled="true" style="color:black">Vorherige Seite</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage - 1}" tabindex="-1" aria-disabled="true" style="color:black">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage - 1}" tabindex="-1" aria-disabled="true" style="color:black">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage - 1}" tabindex="-1" aria-disabled="true" style="color:black">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" th:text="${currentPage}" style="color:black"></a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage + 1}" style="color:black">Nächste Seite</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=295" style="color:black">Letzte Seite</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                -->
-
-                <!--PAGINATION END -->
-
-                <!--
-               ${page.firstPage} und ${page.lastPage} sind boolesche Ausdrücke, die prüfen, ob sich die aktuelle Seite am Anfang oder Ende der Suchergebnisse befindet.
-               th:class bindet die Klasse an den DOM-Knoten an, abhängig von der Bedingung, die du angegeben hast. Wenn die Bedingung wahr ist, wird die entsprechende Klasse angewendet, andernfalls wird die zweite Klasse angewendet.
-               th:each wird verwendet, um eine Schleife über eine Liste zu erstellen.
-               th:href wird verwendet, um den Link für jede Seite zu erstellen.
-               th:text wird verwendet, um den Text innerhalb des Link-Tags zu setzen.
-                -->
-            </div>
-            </div>
+        </div>
         </div>
 
     </div>
-
+</div>
 </body>
 </html>
-
-<!--
-products -> {SearchResult@8774} "SearchResult{rawResponse=null, statusCode=200, name='products', statusMessage='OK',
-documents=[Document{id=dddfb3ea-81c5-4df7-95e6-2b69c52cb76b,
-document={previewImageUrl=https://images.alexander-buerkle.cloud/cdn-cgi/image/width=700,quality=85,format=auto/https://images.deha.de/?file=9CB5F7693ED76D48E05332C8A8C071C2&preset=308x148,
-accessories=false, salesUnit=1, procuredProduct=false, name=WAGO 2003-7692 Abschlussplatte und Zwischenplatte orange, alternatives=false, quantityUnit=Stück,
-productCocontractor=false, productCocontractorValue=, sku=2101675}}, Document{id=37ef3827-fd67-41c5-90d1-05d0158b6766,
-document={previewImageUrl=https://images.alexander-buerkle.cloud/cdn-cgi/image/width=700,quality=85,format=auto/https://images.deha.de/?file=B36FB7E52BC7743AE05332C8A8C00C3D&preset=673x377,
-accessories=true, salesUnit=1, procuredProduct=false, name=WAGO 2009-305 Sammelschienenträger blau TS35, alternatives=false, quantityUnit=Stück, productCocontractor=false, productCocontractorValue=,"
--->
