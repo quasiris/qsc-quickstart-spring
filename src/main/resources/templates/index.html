@@ -107,7 +107,6 @@
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container mb-3">
-
                 <ul>
                     <li>Verfügbarkeit</li>
                     <li>Hersteller</li>
@@ -127,7 +126,6 @@
                     <li>meist gekauft</li>
                     <li>Kategorie</li>
                 </ul>
-
             </div>
             <div class="filter-button">
                 <a href="/filter" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Ergebnisse filtern</a>
@@ -152,9 +150,7 @@
 
                 </div>
             </div>
-
         </div>
-
         <div class="col-md-8">
             <div class="results-container">
                 <div th:if="${not #lists.isEmpty(searchResults)}">
@@ -174,7 +170,6 @@
                         <div th:utext="${searchResults.result.products.name}"></div>
                         -->
 
-
                         <!-- DOCUMENTS OUTPUT -->
                         <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
                             <b>Keine Ergebnisse</b> &#x1F641 <br>
@@ -190,10 +185,8 @@
                             <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
                             <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
                             <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
-
                             <br>
                             <br>
-
                             <a th:href="@{/}" class="btn btn-dark">Zurück zur Startseite</a>
 
                         </div>
