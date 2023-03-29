@@ -25,6 +25,21 @@ public class FacetsController {
 
     }
 
+    @GetMapping("/bonus")
+    public List<filteredBonus> filterByBonus(@RequestParam("bonus") String bonus) {
+
+    }
+
+    @GetMapping("/bonus")
+    public List<filteredBonus> filterByBonus(@RequestParam("bonus") String bonus) {
+
+    }
+
+    @GetMapping("/category")
+    public List<filteredCategory> filterByCategory(@RequestParam("category") String category) {
+
+    }
+
 }
 
 */

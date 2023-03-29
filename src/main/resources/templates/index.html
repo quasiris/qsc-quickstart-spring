@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.png}"/>
 
     <style>
@@ -18,6 +19,7 @@
             background-color:white;
             color: black;
             margin-top: 25px;
+            margin bottom: 25px;
             /* overflow: hidden; */
         }
         .logo {
@@ -44,7 +46,8 @@
         }
         .results-container {
             border: 1px solid black;
-            padding:10px;
+            padding-right: 10px;
+            padding-left: 10px;
             min-height: 500px;
             position: relative;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -52,12 +55,6 @@
         .alert.alert-secondary {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
             background-color: white;
-        }
-        .pagination {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
         }
         .filters-container {
             border: 1px solid black;
@@ -75,13 +72,15 @@
             list-style: none;
         }
         .alert:hover {
-          background-color: #D9D9D9;
+          background-color: #F5F5F5;
           cursor: pointer;
         }
+
 </style>
 
 </head>
 <body>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4">
@@ -93,7 +92,6 @@
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="query" name="q" placeholder="Suchbegriff eingeben">
                     </div>
-
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Suchen</button>
                     </div>
@@ -104,83 +102,111 @@
             </form>
         </div>
     </div>
+
+    <div th:if="${not #lists.isEmpty(searchResults)}">
+        <div th:unless="${#lists.isEmpty(searchResults.result.products.documents)}">
+            <div class="col-md-16" style="float:right; padding-left: 30px; margin-top: 70px;">
+                <div class="row mt-4">
+                    <div class="dropdown"><!-- DROPDOWN START -->
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" disabled>
+                            Sortieren nach:
+                        </button>
+                        <div class="dropdown" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item" id="score" name="Relevanz" href="#">Relevanz</button>
+                            <button class="dropdown-item" id="priceasc" name="Preis aufsteigend" href="#">Preis aufsteigend</button>
+                            <button class="dropdown-item" id="pricedesc" name="Preis absteigend" href="#">Preis absteigend</button>
+                            <button class="dropdown-item" id="titleaz" name="Titel A-Z" href="#">Titel A-Z</button>
+                            <button class="dropdown-item" id="titleza" name="Titel Z-A" href="#">Titel Z-A</button>
+                            <button class="dropdown-item" id="lastPurchased" name="zuletzt gekauft" href="#">zuletzt gekauft</button>
+                        </div>
+
+                         <!-- <div th:utext="${searchResults.result.products.total}"></div> -->
+
+                        <!-- Relevanz Sortierung -->
+
+                        <!-- Preis absteigend -->
+
+                        <!-- Preis absteigend -->
+
+                        <!-- A - Z Sortierung -->
+
+
+                        <!-- Z - A Sortierung -->
+
+
+
+                    </div> <!-- DROPDOWN END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container mb-3">
                 <ul>
-                    <li>Verfügbarkeit</li>
-                    <li>Hersteller</li>
-                        <ul>
-                            <li>WAGO</li>
-                            <li>WAGO Kontakttechnik</li>
-                            <li>Berker by Hager</li>
-                            <li>WERMA Signaltechnik</li>
-                            <li>Hager Tehalit</li>
-                            <li>Hager Vertriebsgesellschaft mbH & Co.KG</li>
-                            <li>Eaton</li>
-                            <li>Spelsberg</li>
-                            <li>Cellpack</li>
-                            <li>Bachmann</li>
-                        </ul>
-                    <li>Bonusprogramme</li>
-                    <li>meist gekauft</li>
-                    <li>Kategorie</li>
+                    <li><b>Verfügbarkeit</b></li>
+                    <ul>
+                        <li>verfügbar</li>
+                        <li>nicht verfügbar</li>
+                    </ul>
+                    <li><b>Hersteller</b></li>
+                    <ul>
+                        <li>WAGO</li>
+                        <li>WAGO Kontakttechnik</li>
+                        <li>Berker by Hager</li>
+                        <li>WERMA Signaltechnik</li>
+                        <li>Hager Tehalit</li>
+                        <li>Hager Vertriebsgesellschaft</li>
+                        <li>Eaton</li>
+                        <li>Spelsberg</li>
+                        <li>Cellpack</li>
+                        <li>Bachmann</li>
+                    </ul>
+                    <li><b>Bonusprogramme</b></li>
+                    <li><b>meist gekauft</b></li>
+                    <li><b>Kategorie</b></li>
+                    <ul>
+                        <li>Reihenklemmen</li>
+                        <li>Dosen- & Installationsklemmen</li>
+                        <li>Kennzeichnungsmaterial</li>
+                        <li>Industrielle Netzwerktechnik</li>
+                        <li>Relais Industrie</li>
+                        <li>Netzgeräte, Trafos & Stromversorgungen</li>
+                        <li>Trennschaltgeräte, Mess-, & Regler-Relais</li>
+                        <li>Sensor-Aktor Kabel</li>
+                        <li>Stromwandler</li>
+                        <li>Signalgeräte optisch / akustisch</li>
+                    </ul>
                 </ul>
             </div>
             <div class="filter-button">
                 <a href="/filter" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Ergebnisse filtern</a>
             </div>
             <div class="row mt-3"></div>
-
-            <div class="col-md-4">
-                <div class="row mt-3">
-
-                    <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" disabled>
-                            Sortieren nach:
-                        </button>
-                        <div class="dropdown" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" href="#">Relevanz</button>
-                            <button class="dropdown-item" href="#">Preis absteigend</button>
-                            <button class="dropdown-item" href="#">Titel A-Z</button>
-                            <button class="dropdown-item" href="#">Titel Z-A</button>
-                            <button class="dropdown-item" href="#">zuletzt gekauft</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
         <div class="col-md-8">
-            <div class="results-container">
+            <div class="results-container"><!-- RESULTS START -->
                 <div th:if="${not #lists.isEmpty(searchResults)}">
-
-
                     <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
                     <ul>
-                            <!-- STATUS OUTPUT -->
+                        <!-- STATUS OUTPUT -->
                         <!--
                             <div th:utext="${searchResults.statusCode}"></div>
                             <div th:utext="${searchResults.result.products.statusCode}"></div>
                             <div th:utext="${searchResults.result.products.statusMessage}"></div>
                         -->
 
-                            <!-- PRODUCTS NAME OUTPUT -->
-                        <!--
-                        <div th:utext="${searchResults.result.products.name}"></div>
-                        -->
+                        <!-- PRODUCTS NAME OUTPUT -->
+                        <!--<div th:utext="${searchResults.result.products.name}"></div> -->
 
                         <!-- DOCUMENTS OUTPUT -->
                         <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
                             <b>Keine Ergebnisse</b> &#x1F641 <br>
-
                             <br>
-
-                            Es wurden keine mit deiner Suchanfrage  übereinstimmenden Dokumente gefunden. <br>
+                            Es wurden keine mit deiner Suchanfrage übereinstimmenden Dokumente gefunden. <br>
                             <br>
-
                             <b>Vorschläge:</b> <br>
-
                             <li><i>Achte darauf, dass alle Wörter richtig geschrieben sind.</i></li>
                             <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
                             <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
@@ -188,26 +214,63 @@
                             <br>
                             <br>
                             <a th:href="@{/}" class="btn btn-dark">Zurück zur Startseite</a>
-
                         </div>
-                        <div th:each="document : ${searchResults.result.products.documents}">
-                            <div class="alert alert-secondary" th:utext="${document}"></div>
 
+                        <div th:each="document : ${searchResults.result.products.documents}">
+                            <div class="alert alert-secondary" th:utext="${document}" data-bs-toggle="modal" data-bs-target="#resultModal" th:data-document="${document}">
+
+                            </div>
+                            <div id="resultModal" class="modal text-center">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <p th:utext="${document}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-md-12 text-center">
+                                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Schließen</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div><!-- MODAL END -->
                         </div>
                     </ul>
                 </div>
-        </div>
-            <div class="col-md-8">
-                <footer class="text-center text-dark" style="background-color: white; margin-top: 20px">
-                    <div class="text-center p-2" style="background-color: white;">
-                        © 2023 Quasiris
-                        <div th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}"></div>
+                </div>
+            <br>
+            <div class="pagination-wrapper" style="text-align: center;">
+                <div class="col-md-12">
+                    <div class="pagination"style="display:inline-block;">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" id="first" name="Erste" style="color: black;">Erste</a></li>
+                                <li class="page-item"><a class="page-link" id="previous" name="Vorherige" style="color: black;">Vorherige</a></li>
+                                <li class="page-item"><a class="page-link" id="1" name="1" style="color: black;">1</a></li>
+                                <li class="page-item"><a class="page-link" id="2" name="2" style="color: black;">2</a></li>
+                                <li class="page-item"><a class="page-link" id="3" name="3" style="color: black;">3</a></li>
+                                <li class="page-item"><a class="page-link" id="next" name="naechste" style="color: black;">Nächste</a></li>
+                                <li class="page-item"><a class="page-link" id="last" name="last" style="color: black;">Letzte</a></li>
+                            </ul>
+                        </nav>
                     </div>
-
-                </footer>
+                </div>
             </div>
+            </div><!-- RESULTS END -->
+
         </div>
     </div>
+
+    <div class="col-md-12 text-center"><!-- FOOTER START -->
+        <br>
+            <p class="copyright">© 2023 Quasiris GmbH - Daten zu Diamanten</p>
+            <!-- <p class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}"></p> -->
+    </div><!-- FOOTER END -->
+
 </div>
+
+
+
 </body>
 </html>
