@@ -92,9 +92,15 @@
             <version>2.7.0</version>
             <scope>import</scope>
         </dependency>
+		<dependency>
+			<groupId>com.quasiris.qsf</groupId>
+			<artifactId>qsf-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 
-    </dependencies>
+
+	</dependencies>
 
 	<build>
 		<plugins>

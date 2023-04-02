@@ -8,91 +8,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Meine CSS -->
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.png}"/>
-
-    <style>
-        html {
-            /* overflow: hidden; */
-        }
-        body {
-            background-color:white;
-            color: black;
-            margin-top: 25px;
-            margin bottom: 25px;
-            /* overflow: hidden; */
-        }
-        .logo {
-            display: center;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;
-        }
-        h4 {
-            font-size: 18px;
-            font-weight: bold;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        .github {
-            display: center;
-            margin-left: auto;
-            margin-right: 0;
-            width: 45%;
-            cursor: pointer;
-        }
-        .form-control {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-        .results-container {
-            border: 1px solid black;
-            padding-right: 10px;
-            padding-left: 10px;
-            min-height: 500px;
-            position: relative;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-        .alert.alert-secondary {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-            background-color: white;
-        }
-        .filters-container {
-            border: 1px solid black;
-            padding: 10px;
-            min-height: 400px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-        .company-name {
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: black;
-        }
-        ul {
-            list-style: none;
-             margin: 0px;
-            padding: 0px;
-        }
-        .alert:hover {
-          background-color: #F5F5F5;
-          cursor: pointer;
-        }
-        .filter-button, .filter-reset-button {
-          display: inline-block;
-        }
-        li {
-            list-style: none;
-        }
-        .pagination-wrapper {
-            cursor: pointer;
-        }
-
-
-
-
-    </style>
 
 </head>
 <body>
@@ -147,6 +71,41 @@
                             </button>
                         </div>
 
+                        <!--
+                 <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.dropdown-menu a').click(function () {
+                            var sortOption = $(this).data('sort');
+                            switch (sortOption) {
+                                case 'score':
+                                    // Logik für die Sortierung nach Relevanz hier
+                                    break;
+                                case 'price':
+                                    // Logik für die Sortierung nach Preis aufsteigend hier
+                                    break;
+                                case 'priced':
+                                    // Logik für die Sortierung nach Preis absteigend hier
+                                    break;
+                                case 'sortaz':
+                                    // Logik für die Sortierung nach Titel A-Z hier
+                                    break;
+                                case 'sortza':
+                                    // Logik für die Sortierung nach Titel Z-A hier
+                                    break;
+                                case 'lastPurchase':
+                                    // Logik für die Sortierung nach letztem Kauf hier
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                    });
+                </script>
+
+
+
+                        -->
+
                         <!-- <div th:utext="${searchResults.result.products.total}"></div> -->
 
                         <!-- Relevanz Sortierung -->
@@ -168,6 +127,8 @@
         </div>
     </div>
 
+    <div th:if="${not #lists.isEmpty(searchResults)}">
+        <div th:unless="${#lists.isEmpty(searchResults.result.products.documents)}">
     <div class="row mt-3">
         <div class="col-md-4">
             <div class="filters-container mb-3">
@@ -358,6 +319,9 @@
                             </label>
                         </li>
                     </ul>
+                </ul>
+            </div>
+        </div>
 
                     <!--
                         <ul>
@@ -373,131 +337,102 @@
                             <li th:classappend="${'Signalgeräte optisch / akustisch' in categories} ? 'active' : ''"><a th:href="@{/search/(q=${searchTerm},categories='Signalgeräte optisch / akustisch')}">Signalgeräte optisch / akustisch</a></li>
                         </ul>
                         -->
-            </div>
-            <div class="col-md-4 d-flex justify-content text-center">
-                <div class="filter-button">
-                    <a href="/filter" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Ergebnisse
-                        filtern</a>
-                </div>
-                <div class="row mt-3"></div>
-                <div class="filter-reset-button" style="padding-left: 50px;">
-                    <a href="/filterreset" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Filter
-                        zurücksetzen</a>
-                </div>
 
-                <!--
-                <script>
-                    function checkboxenAbwaehlen() {
-                    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                    for (var i = 0; i < checkboxes.length; i++) {
-                      checkboxes[i].checked = false;
-                       }
-                    }
-                </script>
-                -->
+            <div class="col-md-8">
+                <div class="results-container"><!-- RESULTS START -->
+                    <div th:if="${not #lists.isEmpty(searchResults)}">
+                        <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
+                        <ul>
+                            <!-- STATUS OUTPUT -->
+                            <!--
+                                <div th:utext="${searchResults.statusCode}"></div>
+                                <div th:utext="${searchResults.result.products.statusCode}"></div>
+                                <div th:utext="${searchResults.result.products.statusMessage}"></div>
+                            -->
 
+                            <!-- PRODUCTS NAME OUTPUT -->
+                            <!--<div th:utext="${searchResults.result.products.name}"></div> -->
 
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="results-container"><!-- RESULTS START -->
-                <div th:if="${not #lists.isEmpty(searchResults)}">
-                    <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
-                    <ul>
-                        <!-- STATUS OUTPUT -->
-                        <!--
-                            <div th:utext="${searchResults.statusCode}"></div>
-                            <div th:utext="${searchResults.result.products.statusCode}"></div>
-                            <div th:utext="${searchResults.result.products.statusMessage}"></div>
-                        -->
-
-                        <!-- PRODUCTS NAME OUTPUT -->
-                        <!--<div th:utext="${searchResults.result.products.name}"></div> -->
-
-                        <!-- DOCUMENTS OUTPUT -->
-                        <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
-                            <b>Keine Ergebnisse</b> &#x1F641 <br>
-                            <br>
-                            Es wurden keine mit deiner Suchanfrage übereinstimmenden Dokumente gefunden. <br>
-                            <br>
-                            <b>Vorschläge:</b> <br>
-                            <li><i>Achte darauf, dass alle Wörter richtig geschrieben sind.</i></li>
-                            <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
-                            <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
-                            <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
-                            <br>
-                            <br>
-                            <a th:href="@{/}" class="btn btn-dark">Zurück zur Startseite</a>
-                        </div>
-
-                        <div th:each="document : ${searchResults.result.products.documents}">
-                            <div class="alert alert-secondary" th:utext="${document}" data-bs-toggle="modal"
-                                 data-bs-target="#resultModal" th:data-document="${document}">
-
+                            <!-- DOCUMENTS OUTPUT -->
+                            <div th:if="${#lists.isEmpty(searchResults.result.products.documents)}">
+                                <b>Keine Ergebnisse</b> &#x1F641 <br>
+                                <br>
+                                Es wurden keine mit deiner Suchanfrage übereinstimmenden Dokumente gefunden. <br>
+                                <br>
+                                <b>Vorschläge:</b> <br>
+                                <li><i>Achte darauf, dass alle Wörter richtig geschrieben sind.</i></li>
+                                <li><i>Probiere es mit anderen Suchbegriffen.</i></li>
+                                <li><i>Probiere es mit allgemeineren Suchbegriffen.</i></li>
+                                <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
+                                <br>
+                                <br>
+                                <a th:href="@{/}" class="btn btn-dark">Zurück zur Startseite</a>
                             </div>
-                            <div id="resultModal" class="modal fade" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content text-center flex-column">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="resultModalLabel" th:utext="${document.document.name}"></h5>
+
+                            <div th:each="document : ${searchResults.result.products.documents}">
+                                <div class="alert alert-secondary" th:utext="${document}" data-bs-toggle="modal"
+                                     data-bs-target="#resultModal" th:data-document="${document}">
+
+                                </div>
+                                <div id="resultModal" class="modal fade" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content text-center flex-column">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="resultModalLabel" th:utext="${document.document.name}"></h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!--
+                                                <b><p th:utext="${document.document.name}"></p></b>
+                                                <i><p th:utext="${document.document.sku}"></p></i>
+                                                -->
+                                                <p th:utext="${document}"></p>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <!--
-                                            <b><p th:utext="${document.document.name}"></p></b>
-                                            <i><p th:utext="${document.document.sku}"></p></i>
-                                            -->
-                                            <p th:utext="${document}"></p>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="col-md-12 text-center">
-                                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                                                Schließen
-                                            </button>
+                                        <div class="modal-footer">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+                                                    Schließen
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- MODAL END -->
-                    </ul>
+                            </div><!-- MODAL END -->
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <br>
-            <div class="col-md-12 text-center"  th:if="${not #lists.isEmpty(searchResults)}">
-                <div class="pagination-wrapper text-center">
-                    <div class="col-md-12 text-center">
-                        <div class="pagination text-center">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" id="first" name="erste"
-                                                             style="color: black;">Erste</a></li>
-                                    <li class="page-item"><a class="page-link" id="previous" name="vorherige"
-                                                             style="color: black;">Vorherige</a></li>
-                                    <li class="page-item"><a class="page-link" id="1" name="1"
-                                                             style="color: black;">1</a></li>
-                                    <li class="page-item"><a class="page-link" id="2" name="2"
-                                                             style="color: black;">2</a></li>
-                                    <li class="page-item"><a class="page-link" id="3" name="3"
-                                                             style="color: black;">3</a></li>
-                                    <li class="page-item"><a class="page-link" id="next" name="naechste"
-                                                             style="color: black;">Nächste</a></li>
-                                    <li class="page-item"><a class="page-link" id="last" name="last"
-                                                             style="color: black;">Letzte</a></li>
-                                </ul>
-                            </nav>
+                <br>
+                <div class="col-md-12 text-center"  th:if="${not #lists.isEmpty(searchResults)}">
+                    <div class="pagination-wrapper text-center">
+                        <div class="col-md-12 text-center">
+                            <div class="pagination text-center">
+                                <nav aria-label="Pagination">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" id="first" name="erste"
+                                                                 style="color: black;">Erste</a></li>
+                                        <li class="page-item"><a class="page-link" id="previous" name="vorherige"
+                                                                 style="color: black;">Vorherige</a></li>
+                                        <li class="page-item"><a class="page-link" id="1" name="1"
+                                                                 style="color: black;">1</a></li>
+                                        <li class="page-item"><a class="page-link" id="2" name="2"
+                                                                 style="color: black;">2</a></li>
+                                        <li class="page-item"><a class="page-link" id="3" name="3"
+                                                                 style="color: black;">3</a></li>
+                                        <li class="page-item"><a class="page-link" id="next" name="naechste"
+                                                                 style="color: black;">Nächste</a></li>
+                                        <li class="page-item"><a class="page-link" id="last" name="last"
+                                                                 style="color: black;">Letzte</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div><!-- RESULTS END -->
-</div>
 
 <div class="col-md-12 text-center"><!-- FOOTER START -->
     <br>
     <p class="copyright">© 2023 Quasiris GmbH - Daten zu Diamanten</p>
-    <!-- <p class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}"></p> -->
+    <p class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}"></p>
 </div><!-- FOOTER END -->
 
 </body>
