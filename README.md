@@ -54,6 +54,16 @@ Um den Container zu stoppen verwenden Sie folgenden Befehl:
 
 docker stop `docker container ls | grep "qsc-quickstart-spring:*" | awk '{ print $1 }'`
 
+## Der erste Start
+
+Wenn Sie die Applikation zum ersten Mal gestartet und im Browser aufgerufen haben, sollten Sie folgende Suchmaske sehen:
+
+
+Dort wird Ihnen angezeigt wie viele Dokumente derzeit zum Durchsuchen vorhanden sind. 
+Eine leere Suche ist nicht möglich. 
+
+Nachdem Sie gesucht haben. sehen Sie folgendes Interface. Dort haben Sie dann die Möglichkeit die Suchergebnisse zu filtern oder
+nach gewissen Kriterien zu sortieren.
 
 - [zurück nach oben](#FastTravel)
 
