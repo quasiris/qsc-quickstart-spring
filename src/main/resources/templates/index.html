@@ -32,7 +32,7 @@
                         <input type="text" class="form-control" id="query" name="q" placeholder="Suchbegriff eingeben"
                                required>
                         <span class="required-text" style="color: red; font-size:13px;">* Pflichtfeld</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span style="font-size:12px;">Derzeit befinden sich 7069 Produkte in der Suche.</span>
+                        <span style="font-size:12px;">Derzeit befinden sich 7069 Produkte in der Suche. </span><span class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}" style="font-size:12px"></span>
                     </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-dark"
@@ -42,9 +42,7 @@
                 </div>
             </form>
 
-
-            <!--
-            <div id="noResults">
+            <div id="noResults" th:if="${#lists.isEmpty(searchResults)}">
                 <b>Keine Ergebnisse</b> &#x1F641 <br>
                 <br>
                 Es wurden keine mit deiner Suchanfrage übereinstimmenden Dokumente gefunden. <br>
@@ -56,7 +54,7 @@
                 <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
                 <br>
             </div>
-            -->
+
         </div>
     </div>
 
@@ -90,7 +88,7 @@
 </div>
 
 
-<div th:if="${not #lists.isEmpty(searchResults)}">
+<div class="col-md-8 text-center" th:if="${not #lists.isEmpty(searchResults)}">
     <div th:unless="${#lists.isEmpty(searchResults.result.products.documents)}">
         <div class="row mt-3">
             <div class="col-md-4" style="margin-right:5px;">
@@ -289,7 +287,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8" id="results-container"><!-- RESULTS START -->
+            <div class="col-md-12" id="results-container"><!-- RESULTS START -->
                 <div th:if="${not #lists.isEmpty(searchResults)}">
                     <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
                     <ul>
@@ -360,8 +358,7 @@
 
             </div>
         </div>
-
-            <br>
+</div>
             <div class="col-md-12 text-center" th:if="${not #lists.isEmpty(searchResults)}">
                 <div class="pagination-wrapper text-center">
                     <div class="col-md-12 text-center">
@@ -392,13 +389,11 @@
             <div class="col-md-12 text-center"><!-- FOOTER START -->
                 <br>
                 <p class="copyright">© 2023 Quasiris GmbH - Daten zu Diamanten</p>
-                <!-- <p class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}"></p> -->
             </div><!-- FOOTER END -->
         </div>
     </div>
-</div>
-</div>
-</div>
+
+
 <a href="https://github.com/quasiris/qsc-quickstart-spring" target="_blank" class="fork-me">
     <img src="https://github.blog/wp-content/uploads/2008/12/forkme_right_white_ffffff.png?resize=149%2C149"
          alt="Fork me on GitHub">
