@@ -35,12 +35,17 @@
                         <span style="font-size:12px;">Derzeit befinden sich 7069 Produkte in der Suche. </span><span class="time" th:text="${#temporals.format(currentTime, 'dd.MM.yyyy HH:mm:ss')}" style="font-size:12px"></span>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-dark"
-                                style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">Suchen
+                        <button type="submit" class="btn btn-dark" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                            Suchen
                         </button>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+            <!--
 
             <div id="noResults" th:if="${#lists.isEmpty(searchResults)}">
                 <b>Keine Ergebnisse</b> &#x1F641 <br>
@@ -54,9 +59,8 @@
                 <li><i>Probiere es mit weniger Suchbegriffen.</i></li>
                 <br>
             </div>
+            -->
 
-        </div>
-    </div>
 
     <div th:if="${not #lists.isEmpty(searchResults)}">
         <div class="col-md-16" style="float:right; padding-left: 30px; padding-right:100px; margin-top: 70px;">
@@ -85,312 +89,280 @@
             </div>
         </div>
     </div>
-</div>
+<br>
+    <div class="results-container" th:if="${not #lists.isEmpty(searchResults)}">
+        <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
+        <ul>
+            <!-- STATUS OUTPUT -->
+            <!--
+                <div th:utext="${searchResults.statusCode}"></div>
+                <div th:utext="${searchResults.result.products.statusCode}"></div>
+                <div th:utext="${searchResults.result.products.statusMessage}"></div>
+            -->
 
+            <!-- PRODUCTS NAME OUTPUT -->
+            <!--<div th:utext="${searchResults.result.products.name}"></div> -->
 
-<div class="col-md-8 text-center" th:if="${not #lists.isEmpty(searchResults)}">
-    <div th:unless="${#lists.isEmpty(searchResults.result.products.documents)}">
-        <div class="row mt-3">
-            <div class="col-md-4" style="margin-right:5px;">
-                <div class="filters-container mb-3" style="margin-left:100px;">
-                    <form method="GET">
-                        <ul>
-                            <li class="available"><b> - Verfügbarkeit - </b></li>
-                            <ul>
-                                <li>
-                                    <label for="available">
-                                        <input type="checkbox" name="verfuegbar"/>
-                                        <span>verfügbar</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label for="notavailable">
-                                        <input type="checkbox" name="nverfuegbar"/>
-                                        <span>nicht verfügbar</span>
-                                    </label>
-                                </li>
-                            </ul>
-                            <li class="hersteller"><b> - Hersteller - </b></li>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="wagoallg"/>
-                                        <span>WAGO</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="wagokontakt"/>
-                                        <span>WAGO Kontakttechnik</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="berkerhager"/>
-                                        <span>Berker by Hager</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="wermersignal"/>
-                                        <span>WERMA Signaltechnik</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="hagerteha"/>
-                                        <span>Hager Tehalit</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="hagervertrieb"/>
-                                        <span>Hager Vertriebsgesellschaft</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="eaton"/>
-                                        <span>Eaton</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="spels"/>
-                                        <span>Spelsberg</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="cell"/>
-                                        <span>Cellpack</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="bach"/>
-                                        <span>Bachmann</span>
-                                    </label>
-                                </li>
-                            </ul>
-                            <li class="bonus"><b> - Bonusprogramme - </b></li>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="bonusProgram1"/>
-                                        <!-- th:value="bonus1" th:checked="${selectedBonusPrograms.contains('bonus1')} -->
-                                        <span>Bonus 1</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="bonusProgram2"/>
-                                        <!-- th:value="bonus2" th:checked="${selectedBonusPrograms.contains('bonus2')} -->
-                                        <span>Bonus 2</span>
-                                    </label>
-                                </li>
-                            </ul>
-                            <li class="mgekauft"><b> - meist gekauft - </b></li>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="bestSeller"/>
-                                        <!--th:value="bestSeller1" th:checked="${selectedBestSellers.contains('bestSeller1')} -->
-                                        <span>Bestseller 1</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="bestSeller"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Bestseller 2</span>
-                                    </label>
-                                </li>
-                            </ul>
-                            <li class="kateg"> <!--th:classappend="${#strings.join(categories,',')} ? 'active' : ''" --><b>
-                                - Kategorie - </b>
-                            </li>
-                            <ul>
-                                <li>
-                                    <label for="category1"
-                                    <input type="checkbox" name="reihenklemmen" id="category1"/>
-                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                    <span>Reihenklemmen</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="doseninstallation"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Dosen- &amp; Installationsklemmen</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="kennmaterial"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Kennzeichnungsmaterial</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="indusnetztech"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Industrielle Netzwerktechnik</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="relais"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Relais Industrie</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="netztrafostrom"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Netzgeräte, Trafos &amp; Stromversorgungen</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="trennmessregler"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Trennschaltgeräte, Mess-, &amp; Regler-Relais</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="sensorkabel"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Sensor-Aktor Kabel</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="stromwandler"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Stromwandler</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" name="signalgeräte"/>
-                                        <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
-                                        <span>Signalgeräte optisch / akustisch</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </ul>
-                    </form>
+            <!-- DOCUMENTS OUTPUT -->
+            <div th:each="document : ${searchResults.result.products.documents}">
+                <div class="alert alert-dark"
+                     th:utext="${document}"
+                     data-bs-toggle="modal" data-bs-target="#resultModal" th:data-document="${document}">
                 </div>
-            </div>
 
-            <div class="col-md-12" id="results-container"><!-- RESULTS START -->
-                <div th:if="${not #lists.isEmpty(searchResults)}">
-                    <h4 class="text-center">Suchergebnisse für "<span th:text="${param.q}"></span>"</h4>
-                    <ul>
-                        <!-- STATUS OUTPUT -->
-                        <!--
-                            <div th:utext="${searchResults.statusCode}"></div>
-                            <div th:utext="${searchResults.result.products.statusCode}"></div>
-                            <div th:utext="${searchResults.result.products.statusMessage}"></div>
-                        -->
-
-                        <!-- PRODUCTS NAME OUTPUT -->
-                        <!--<div th:utext="${searchResults.result.products.name}"></div> -->
-
-                        <!-- DOCUMENTS OUTPUT -->
-                        <div th:each="document : ${searchResults.result.products.documents}">
-                            <div class="alert alert-dark"
-                                 th:utext="${document}"
-                                 data-bs-toggle="modal" data-bs-target="#resultModal" th:data-document="${document}">
+                <div id="resultModal" class="modal fade" tabindex="-1"
+                     aria-labelledby="resultModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content text-center flex-column">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="resultModalLabel"
+                                    th:utext="${document.document.name}" style="font-weight:bold;"></h5>
                             </div>
-
-                            <div id="resultModal" class="modal fade" tabindex="-1"
-                                 aria-labelledby="resultModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content text-center flex-column">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="resultModalLabel"
-                                                th:utext="${document.document.name}" style="font-weight:bold;"></h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <br>
-                                            <span style="font-weight:bold;">Document ID</span>
-                                            <span style="display: block;">[[${document.id}]]</span><br>
-                                            <!--
-                                            <span style="font-weight: bold;">Name:</span>
-                                            <span style="display: block;">[[${document.document.name}]]</span><br>
-                                            -->
-                                            <hr>
-                                            <br>
-                                            <span style="font-weight: bold;">Quantity Unit:</span>
-                                            <span style="display: block;">[[${document.document.quantityUnit}]]</span><br>
-                                            <span style="font-weight: bold;">SKU:</span>
-                                            <span style="display: block;">[[${document.document.sku}]]</span>
-                                            <hr>
-                                            <br>
-                                            <span style="font-weight: bold;">Sales Unit:</span>
-                                            <span style="display: block;">[[${document.document.salesUnit}]]</span>
-                                            <span style="font-weight: bold;">Accessories:</span>
-                                            <span style="display: block;">[[${document.document.accessories}]]</span>
-                                            <span style="font-weight: bold;">Procured Product:</span>
-                                            <span style="display: block;">[[${document.document.procuredProduct}]]</span>
-                                            <span style="font-weight: bold;">Alternatives:</span>
-                                            <span style="display: block;">[[${document.document.alternatives}]]</span>
-                                            <span style="font-weight: bold;">Product Co-contractor:</span>
-                                            <span style="display: block;">[[${document.document.productCocontractor}]]</span>
-                                            <span style="font-weight: bold;">Product Co-contractor Value:</span>
-                                            <span style="display: block;">[[${document.document.productCocontractorValue}]]</span>
-                                        </div>
-                                        <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                                                Schließen
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="modal-body">
+                                <br>
+                                <span style="font-weight:bold;">Document ID</span>
+                                <span style="display: block;">[[${document.id}]]</span><br>
+                                <!--
+                                <span style="font-weight: bold;">Name:</span>
+                                <span style="display: block;">[[${document.document.name}]]</span><br>
+                                -->
+                                <hr>
+                                <br>
+                                <span style="font-weight: bold;">Quantity Unit:</span>
+                                <span style="display: block;">[[${document.document.quantityUnit}]]</span><br>
+                                <span style="font-weight: bold;">SKU:</span>
+                                <span style="display: block;">[[${document.document.sku}]]</span>
+                                <hr>
+                                <br>
+                                <span style="font-weight: bold;">Sales Unit:</span>
+                                <span style="display: block;">[[${document.document.salesUnit}]]</span>
+                                <span style="font-weight: bold;">Accessories:</span>
+                                <span style="display: block;">[[${document.document.accessories}]]</span>
+                                <span style="font-weight: bold;">Procured Product:</span>
+                                <span style="display: block;">[[${document.document.procuredProduct}]]</span>
+                                <span style="font-weight: bold;">Alternatives:</span>
+                                <span style="display: block;">[[${document.document.alternatives}]]</span>
+                                <span style="font-weight: bold;">Product Co-contractor:</span>
+                                <span style="display: block;">[[${document.document.productCocontractor}]]</span>
+                                <span style="font-weight: bold;">Product Co-contractor Value:</span>
+                                <span style="display: block;">[[${document.document.productCocontractorValue}]]</span>
                             </div>
-                        </div>
-                </ul>
-
-            </div>
-        </div>
-</div>
-            <div class="col-md-12 text-center" th:if="${not #lists.isEmpty(searchResults)}">
-                <div class="pagination-wrapper text-center">
-                    <div class="col-md-12 text-center">
-                        <div class="pagination text-center">
-                            <nav aria-label="Pagination">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" id="first" name="erste"
-                                                             style="color: black;">Erste</a></li>
-                                    <li class="page-item"><a class="page-link" id="previous" name="vorherige"
-                                                             style="color: black;">Vorherige</a></li>
-                                    <li class="page-item"><a class="page-link" id="1" name="1"
-                                                             style="color: black;">1</a></li>
-                                    <li class="page-item"><a class="page-link" id="2" name="2"
-                                                             style="color: black;">2</a></li>
-                                    <li class="page-item"><a class="page-link" id="3" name="3"
-                                                             style="color: black;">3</a></li>
-                                    <li class="page-item"><a class="page-link" id="next" name="naechste"
-                                                             style="color: black;">Nächste</a></li>
-                                    <li class="page-item"><a class="page-link" id="last" name="last"
-                                                             style="color: black;">Letzte</a></li>
-                                </ul>
-                            </nav>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+                                    Schließen
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </ul>
+    </div>
 
-            <div class="col-md-12 text-center"><!-- FOOTER START -->
+<div class="col-md-4" th:if="${not #lists.isEmpty(searchResults)}">
+<div th:unless="${#lists.isEmpty(searchResults.result.products.documents)}">
+    <div class="row mt-3">
+        <div class="col-md-4" style="margin-right:5px;">
+            <div class="filters-container mb-3" style="margin-left:100px;">
+                <form method="GET">
+                    <ul>
+                        <li class="available"><b> - Verfügbarkeit - </b></li>
+                        <ul>
+                            <li>
+                                <label for="available">
+                                    <input type="checkbox" name="verfuegbar"/>
+                                    <span>verfügbar</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="notavailable">
+                                    <input type="checkbox" name="nverfuegbar"/>
+                                    <span>nicht verfügbar</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <li class="hersteller"><b> - Hersteller - </b></li>
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="wagoallg"/>
+                                    <span>WAGO</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="wagokontakt"/>
+                                    <span>WAGO Kontakttechnik</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="berkerhager"/>
+                                    <span>Berker by Hager</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="wermersignal"/>
+                                    <span>WERMA Signaltechnik</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="hagerteha"/>
+                                    <span>Hager Tehalit</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="hagervertrieb"/>
+                                    <span>Hager Vertriebsgesellschaft</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="eaton"/>
+                                    <span>Eaton</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="spels"/>
+                                    <span>Spelsberg</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="cell"/>
+                                    <span>Cellpack</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="bach"/>
+                                    <span>Bachmann</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <li class="bonus"><b> - Bonusprogramme - </b></li>
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="bonusProgram1"/>
+                                    <!-- th:value="bonus1" th:checked="${selectedBonusPrograms.contains('bonus1')} -->
+                                    <span>Bonus 1</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="bonusProgram2"/>
+                                    <!-- th:value="bonus2" th:checked="${selectedBonusPrograms.contains('bonus2')} -->
+                                    <span>Bonus 2</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <li class="mgekauft"><b> - meist gekauft - </b></li>
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="bestSeller"/>
+                                    <!--th:value="bestSeller1" th:checked="${selectedBestSellers.contains('bestSeller1')} -->
+                                    <span>Bestseller 1</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="bestSeller"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Bestseller 2</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <li class="kateg"> <!--th:classappend="${#strings.join(categories,',')} ? 'active' : ''" --><b>
+                            - Kategorie - </b>
+                        </li>
+                        <ul>
+                            <li>
+                                <label for="category1"
+                                <input type="checkbox" name="reihenklemmen" id="category1"/>
+                                <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                <span>Reihenklemmen</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="doseninstallation"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Dosen- &amp; Installationsklemmen</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="kennmaterial"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Kennzeichnungsmaterial</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="indusnetztech"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Industrielle Netzwerktechnik</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="relais"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Relais Industrie</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="netztrafostrom"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Netzgeräte, Trafos &amp; Stromversorgungen</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="trennmessregler"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Trennschaltgeräte, Mess-, &amp; Regler-Relais</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="sensorkabel"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Sensor-Aktor Kabel</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="stromwandler"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Stromwandler</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="signalgeräte"/>
+                                    <!-- th:value="bestSeller2" th:checked="${selectedBestSellers.contains('bestSeller2')} -->
+                                    <span>Signalgeräte optisch / akustisch</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 text-center">
                 <br>
                 <p class="copyright">© 2023 Quasiris GmbH - Daten zu Diamanten</p>
-            </div><!-- FOOTER END -->
-        </div>
     </div>
 
 

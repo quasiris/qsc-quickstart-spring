@@ -23,13 +23,14 @@ html {
         .form-control {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
-        #results-container {
+        .results-container {
             border: 1px solid black;
             min-height: 300px;
-            min-width: 400px;
+            width: 400px;
             padding:10px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+            display: inline-block;
+            margin-left: 670px;
 
         }
         .alert.alert-secondary {
@@ -46,7 +47,6 @@ html {
             border: 1px solid black;
             padding: 10px;
             min-height: 400px;
-            width: 300px;
             width: 300px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
