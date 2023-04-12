@@ -20,6 +20,14 @@ html {
             padding-top: 5px;
             padding-bottom: 5px;
         }
+        #searchbar {
+            margin-left: 350px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+        }
         .form-control {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
@@ -30,8 +38,8 @@ html {
             padding:10px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             display: inline-block;
-            margin-left: 670px;
-
+            margin-left: 750px;
+            /* margin-top:100px; */
         }
         .alert.alert-secondary {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
@@ -43,18 +51,33 @@ html {
                     padding 10px;
                     margin: 5px;
          }
+
         .filters-container {
             border: 1px solid black;
             padding: 10px;
             min-height: 400px;
-            width: 300px;
+            width: 350px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
+        #sortmenu {
+            margin-left: 150px;
+          /*  margin-right: 200px; */
+          /*  padding: 50px; */
+          /*  position: fixed; */
+            /* margin-left:1230px; */
+        }
+        */
+
+        /*
         .company-name {
             padding: 20px;
             text-align: center;
             font-weight: 600;
             color: black;
+        }
+        */
+        #copyright {
+           margin-left: 300px;
         }
         ul {
             list-style: none;
@@ -65,15 +88,18 @@ html {
           background-color: #F5F5F5;
           cursor: pointer;
         }
+        /*
         .filter-button, .filter-reset-button {
           display: inline-block;
         }
+        */
         li {
             list-style: none;
         }
-        .pagination-wrapper {
+        .pagination {
+            padding-top: 10px;
             cursor: pointer;
-            margin-left: 469px;
+            margin-left: 374px;
         }
         .fork-me {
           position: fixed;
