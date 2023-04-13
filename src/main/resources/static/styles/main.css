@@ -1,122 +1,77 @@
-html {
-            /* overflow: hidden; */
+        html {
+            overflow: hidden;
         }
         body {
             background-color:white;
             color: black;
             margin-top: 25px;
             margin bottom: 25px;
-            /* overflow: hidden; */
+            overflow: hidden;
         }
-        .logo {
-            display: center;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-        }
-        h4 {
-            font-size: 18px;
-            font-weight: bold;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        #searchbar {
-            margin-left: 350px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-
-        }
-        .form-control {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-        .results-container {
-            border: 1px solid black;
-            min-height: 300px;
-            width: 400px;
-            padding:10px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            display: inline-block;
-            margin-left: 750px;
-            /* margin-top:100px; */
-        }
-        .alert.alert-secondary {
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-            background-color: white;
-        }
-        .alert.alert-dark {
-                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-                    background-color: white;
-                    padding 10px;
-                    margin: 5px;
-         }
-
-        .filters-container {
-            border: 1px solid black;
-            padding: 10px;
-            min-height: 400px;
-            width: 350px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-        #sortmenu {
-            margin-left: 150px;
-          /*  margin-right: 200px; */
-          /*  padding: 50px; */
-          /*  position: fixed; */
-            /* margin-left:1230px; */
-        }
-        */
-
-        /*
-        .company-name {
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: black;
-        }
-        */
-        #copyright {
-           margin-left: 300px;
-        }
-        ul {
-            list-style: none;
-             margin: 0px;
-            padding: 0px;
-        }
-        .alert:hover {
-          background-color: #F5F5F5;
-          cursor: pointer;
-        }
-        /*
-        .filter-button, .filter-reset-button {
-          display: inline-block;
-        }
-        */
         li {
             list-style: none;
         }
-        .pagination {
-            padding-top: 10px;
-            cursor: pointer;
-            margin-left: 374px;
+        ul {
+            list-style: none;
+        }
+        h4 {
+             font-size: 18px;
+             font-weight: bold;
+             padding-top: 5px;
+             padding-bottom: 5px;
         }
         .fork-me {
-          position: fixed;
-          top: 0;
-          right: 0;
-          z-index: 9999;
-          transform: rotate(360deg);
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 9999;
+            transform: rotate(360deg);
         }
-
         .fork-me:hover {
-          opacity: 0.8;
+           opacity: 0.8;
         }
-        #noResults {
-            justify-content: center;
+        .logo {
+
+        }
+        .container {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             padding: 10px;
-            margin-top: 80px;
-            max-width:420px;
-            text-align: center;
         }
+         .alert.alert-secondary {
+             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+             background-color: white;
+         }
+         .alert:hover {
+            background-color: #F5F5F5;
+            cursor: pointer;
+         }
+         .alert.alert-dark {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+            background-color: white;
+            padding 10px;
+            margin: 5px;
+         }
+         .form-control {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+         }
+         .results-container {
+            max-height: 300px;
+         }
+         #searchbar {
+
+         }
+         #sortmenu {
+            padding: 200px;
+         }
+         .filters-container {
+            min-height: 300px;
+            margin-left: 200px;
+            margin-top: 50px;
+         }
+         #pagination {
+            display:flex;
+            justify-content:center;
+         }
+
+
+
