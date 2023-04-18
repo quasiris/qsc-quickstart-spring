@@ -1,12 +1,12 @@
         html {
-            overflow: hidden;
+
         }
         body {
             background-color:white;
             color: black;
             margin-top: 25px;
             margin bottom: 25px;
-            overflow: hidden;
+
         }
         li {
             list-style: none;
@@ -55,7 +55,7 @@
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
          }
          .results-container {
-            max-height: 300px;
+            max-height: 200px;
          }
          #searchbar {
 
