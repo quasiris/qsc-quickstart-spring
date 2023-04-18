@@ -1,15 +1,14 @@
 package de.jonasermert.quasiris.search.api.controller;
 
 import com.quasiris.qsf.dto.response.SearchResponse;
-import com.quasiris.qsf.dto.response.SearchResult;
 import de.jonasermert.quasiris.search.api.service.SearchService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller("SearchController")
@@ -20,6 +19,12 @@ public class SearchController {
 
     @Autowired
     private SearchService searchService;
+
+    @ModelAttribute("isInitialRequest")
+    public boolean isInitialRequest() {
+
+        return true;
+    }
 
     @GetMapping("/search")
     public String search(@RequestParam(name = "q") String query, @NotNull Model model) {

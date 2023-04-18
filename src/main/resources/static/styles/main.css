@@ -6,7 +6,6 @@
             color: black;
             margin-top: 25px;
             margin bottom: 25px;
-
         }
         li {
             list-style: none;
@@ -54,9 +53,7 @@
          .form-control {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
          }
-         .results-container {
-            max-height: 200px;
-         }
+
          #searchbar {
 
          }
@@ -72,6 +69,10 @@
             display:flex;
             justify-content:center;
          }
+         #query.form-control:focus {
+           border-color: black;
+           box-shadow: none;
+          }
 
 
 
