@@ -6,8 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -20,33 +18,14 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @ModelAttribute("isInitialRequest")
-    public boolean isInitialRequest() {
-
-        return true;
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam(name = "q") String query, @NotNull Model model) {
-        SearchResponse searchResults = searchService.getSearchResults(query);
+    public String search(@RequestParam(name = "q") String query,
+                         @RequestParam(name = "f.availability", required = false) String availability,
+                         @RequestParam(name = "f.suppliername", required = false) String supplierName,
+                         @RequestParam(name = "f.category", required = false) String category,
+                         @NotNull Model model) {
+        SearchResponse searchResults = searchService.getSearchResults(query, availability, supplierName, category);
         model.addAttribute("searchResults", searchResults);
         return "index";
     }
-
-
-    /*
-
-    // Anzahl der gefundenen Suchergebnisse ausgeben
-    @GetMapping("/")
-    public String search(@RequestParam(name = "query") String query, Model model) {
-        List<SearchResult> results = searchService.search(query);
-        int count = results.size(); // zählt die Anzahl der Suchergebnisse
-        model.addAttribute("results", results);
-        model.addAttribute("query", query);
-        model.addAttribute("count", count); // fügt die Anzahl der Suchergebnisse dem Model hinzu
-        return "search";
-    }
-*/
-
 }
 
